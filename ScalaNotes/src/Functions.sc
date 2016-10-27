@@ -1,3 +1,4 @@
+import scala.xml.dtd.ContentModel._labelT
 
 // Basic Function
  def sum1 (a:Int,b:Int):Int = a+b
@@ -6,7 +7,7 @@
 def pinta (s:String):Unit =println("no devolvemos nada")
 
 
-// High order functions
+// High order functions (la salida es una funcion)
 def cuadrado1 (x:Int):Int = x*x    	//devuelve una función
 val myCuadrado1:Int => Int =cuadrado1 //un valor que apunta a una funcion
   // --> Funcion como objeto
@@ -36,4 +37,39 @@ pinta1
 myPinta
 
 
-//def cuadrado (Int):Int = _*_    	//versión abreviada
+//def cuadrado :Int = _ * 2   	//versión abreviada
+/// no funciona pq las versiones abreviadas son para literal functions
+
+
+
+//High order functions (parametros como funcion)
+def add1 (s:String =>Int, str:String, n:Int)  = s(str)+n
+def toString2(s:String):Int = s.toInt
+toString2("2")
+add1(toString2,"2",1)
+add1(s=>s.toInt,"2",1)  //passs function on fly
+
+
+//Literal functions
+val myCuadrado4 = (x:Int) => x*x   //ver que para definir la funcion se usa => y no =
+myCuadrado4(5)
+
+//Literal Functions without params
+val myPinta2 =()=> "Hi"
+println(myPinta2())  //DUDA pq no pinta '''
+
+
+/// Literal functions with placeholders
+val double2:Int => Int = _ * 2
+double2(5)
+
+
+
+val cuadrado2:(Int,Int) =>Int = _*_
+cuadrado2(2,1)
+
+//Duda
+//val cuadrado3:(Int) =>Int = _*_
+
+// Duda : que es y pq funciona ??
+//val even = (a:Int) => a%2 ==0
