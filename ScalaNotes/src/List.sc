@@ -20,14 +20,14 @@ def myFold [A](l:List[A])(op: (A,A) => A )(ini:A):A = {
   def myFoldAux [A] (l:List[A])(acu:A)(op: (A,A) => A ):A =
   {
     l match {
-       case Nil => Nil
+       case Nil => acu
        case head :: tail => myFoldAux (tail)(op(head,acu))(op)
     }
   }
 
 
   l match {       //Primer paso
-    case Nil => Nil
+    case Nil => ini
     case head :: tail => myFoldAux (l)(ini)(op)
 
   }
@@ -36,4 +36,3 @@ def myFold [A](l:List[A])(op: (A,A) => A )(ini:A):A = {
 
 
 //DUDA que son los catamorfirmos
-//DUDA el ejemplo creo que esta mal

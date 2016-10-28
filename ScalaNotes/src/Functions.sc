@@ -63,13 +63,28 @@ println(myPinta2())  //DUDA pq no pinta '''
 val double2:Int => Int = _ * 2
 double2(5)
 
-
-
 val cuadrado2:(Int,Int) =>Int = _*_
 cuadrado2(2,1)
 
-//Duda
-//val cuadrado3:(Int) =>Int = _*_
+//val cuadrado3:(Int) =>Int = _*_   //ERROR
+// No se puede usar la sintaxis simplificada si queremos usar mas de una vez la misma variable _
 
-// Duda : que es y pq funciona ??
-//val even = (a:Int) => a%2 ==0
+//Hay que usar sintaxis completa
+val cuadrado4:(Int) =>Int = i => i*i
+
+// Duda : que es y pq funciona
+val even1: Int => Boolean = (a:Int) => a%2 ==0
+//val nom: Type = funcion
+//   type es       Int=> Boolean
+//   funcion es    (a:Int)=> a%2 ==0  Esta expresada en formato lambda
+//                 La funcion recive un Int llamado a => el cuerpo de la funcion
+
+
+val even2 = (a:Int) => a%2 ==0
+//omitimos el type, dejamos que lo infiera de la funcion lambda
+
+//val even3 = _%2 ==0  // ERROR
+// Si se usa notacion abreviada a de func lambda, hay que indicarle el tipo de dato de _
+
+//Solucion:
+val even4: Int => Boolean = _%2 ==0
