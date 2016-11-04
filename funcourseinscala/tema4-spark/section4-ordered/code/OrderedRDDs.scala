@@ -9,6 +9,7 @@ object OrderedRDDs extends InitialSetup {
    * Transformaciones sobre RDDs de pares con tipo K ordenado
    * (OrderedRDDFunctions)
    */
+   //Cuando se crea el ordered RDD, no tenenos que pasarles los datos ordenados
   val users: RDD[(Int,String)] = sc.parallelize(List(
     (1,"Ana"),
     (2,"Pepe"),

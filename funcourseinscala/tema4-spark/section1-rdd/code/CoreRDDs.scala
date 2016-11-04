@@ -80,18 +80,23 @@ object CoreRDDs {
 
   val average: Double =
     randomNumbers.aggregate[(Double, Double)]((0, 0))(
-      (acc, d) => (acc._1 + 1, acc._2 + d),
-      (t1, t2) => (t1._1 + t2._1, t1._2 + t2._2)) match {
+      (acc, d) => (acc._1 + 1, acc._2 + d),  //funccion 1 del aggr
+      (t1, t2) => (t1._1 + t2._1, t1._2 + t2._2)) match { //funcion 2 del aggr
         case (length, sum) => sum/length
       }
 
   /*
    * GROUPBY Y SORTBY
    */
-
+    //a group by necesitamos pasarle una funcion que nos devuelva la key que suaremos para agrupar
+    //en este caso hacemos un modulo 100
   val byEndings: RDD[(Int, Iterable[Double])] =
     randomNumbers.groupBy(_.toInt % 100)
+    //para ordenar al reves sortBy(_.toInt % 100, false)
 
+    //a sorft by hay que pasarle por lo que queremos ordenar, en este caso la funcion identidad (ellos mismos), es una funcion que si le pasas un 3 te devuelve un 3
   val sorted: RDD[Double] = randomNumbers.sortBy(identity)
+  
+  // cuando se trabaja con tuplas de int, podemos usar tupa lookup 23, para que nos devuelva el key 23
 
 }

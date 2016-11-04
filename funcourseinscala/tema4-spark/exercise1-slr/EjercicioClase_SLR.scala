@@ -33,11 +33,11 @@ class EjercicioSLR(sc: SparkContext) extends Serializable {
    * Para calcular la ecuación de la recta necesitamos calcular la media de las x's e y's
    * Calcula la media de los x's e y's
    */
-  val xs: RDD[Double] = ???
-  val ys: RDD[Double] = ???
+  val xs: RDD[Double] = point.map(_._1) // con pattern maching { case (x,_)=> x)}
+  val ys: RDD[Double] = point.map(_._2)
 
-  val meanX: Double = ???
-  val meanY: Double = ???
+  val meanX: Double = xs.mean
+  val meanY: Double = ys.mean
 
   /**
    * Parte II.
@@ -49,8 +49,8 @@ class EjercicioSLR(sc: SparkContext) extends Serializable {
    * TIPS:
    * - 2^3 en Scala => math.pow(2, 3)
    */
-  val sum1: Double = ???
-  val sum2: Double = ???
+  val sum1: Double = points.map((x,y)=>(x-meanX)*(y-meany)).sum
+  val sum2: Double = points.map((x,y)=>math.pow((x-meanX)*x,2).sum
 
   /**
    * Parte III.
@@ -61,8 +61,8 @@ class EjercicioSLR(sc: SparkContext) extends Serializable {
    * b = sum1 / sum2
    * a = meanY - b*meanX
    */
-  val b: Double = ???
-  val a: Double = ???
+  val b: Double = sum1 / sum2
+  val a: Double = meanY - b*meanX
 
   sc.stop()
 

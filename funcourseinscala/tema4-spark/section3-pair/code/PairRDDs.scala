@@ -17,12 +17,19 @@ object PairRDDs extends InitialSetup {
       ("Jose",  5)))
 
   // transformación de valores
+  // Si queremos actuar solo sobre el segundo elemento de una tupla de dos elementos
+  // que normalmente las tuplas represrntas un K-V, 
+  //podemos usar el mapValues, para interaccionar solo sobre el Value, 
+  //ya el que Key se mantendra --> no nos interesa tocarlo
   val amountsWithVAT: RDD[(String, Double)] = bills mapValues (_ * 1.2) // Asumiendo IVA 20%
 
   // agrupación de valores por clave
   val amountsPerUser: RDD[(String, Iterable[Int])] = bills groupByKey()
 
   // combinación de valores por clave, sin valor zero (neutro). Obliga a que el tipo retornado sea el de los valores del RDD
+  // es una group by & reduce, solo hace falta espeficificar la funcion para el value
+  // donde esta el elemento neutro ? no hace falta, pq si no hay key no intenta reducir nada 
+  //   --> no explita
   val fullAmountPerUser: RDD[(String, Int)] = bills.reduceByKey(_ + _)
 
   // Esta vez de manera segura
