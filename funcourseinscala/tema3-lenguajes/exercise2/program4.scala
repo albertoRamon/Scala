@@ -38,7 +38,13 @@ object Program4{
   object Pure{
     import IO.Syntax._
 
-    def readUntilExit[F[_]: IO]: F[Unit] = ???
+    def readUntilExit[F[_]: IO]: F[Unit] = 
+    for {
+      msg <- read
+      _ <- write (msg)
+      _ <- if (msg=="exit") returns(())
+      else readUntilExit
+    }yield ()
   }
 
 }

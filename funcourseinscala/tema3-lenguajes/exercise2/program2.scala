@@ -34,7 +34,12 @@ object Program2{
   object Pure{
     import IO.Syntax._
 
-    def writeANumberBis[F[_]: IO]: F[Unit] = ???
+    def writeANumberBis[F[_]: IO]: F[Unit] = 
+        for {
+      _ <- write "introduce un num"
+      _ <- write writeANumber
+    } yield ()    
+    
   }
 
 }

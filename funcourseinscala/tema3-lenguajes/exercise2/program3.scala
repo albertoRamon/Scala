@@ -37,6 +37,14 @@ object Program3{
     import IO.Syntax._
 
     def readUntilExit[F[_]: IO]: F[Unit] = ???
+    for {
+    msg <-read
+    _ <- if (msg=="exit") returns (())
+    
+    falta
+    }
+    
+    
   }
 
 }

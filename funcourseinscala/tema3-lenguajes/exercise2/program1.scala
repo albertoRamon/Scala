@@ -29,7 +29,7 @@ object Program1{
       s"$n es un número impar"
 
 
-  // Versión impura, ofrecida como referencia
+  // Versión impura, ofrecida como referencia (realmente es pura pero coninterfaces)
   import lenguajes.io.ImpureIO
 
   trait Impure{ IO: ImpureIO.IO =>
@@ -42,11 +42,15 @@ object Program1{
 
   }
 
-  // Versión pura a implementar
+  // Versión pura a implementar (con type clases)
   object Pure{
     import IO.Syntax._
   
-    def writeANumber[F[_]: IO]: F[Unit] = ???
+    def writeANumber[F[_]: IO]: F[Unit] = 
+    for {
+     num <-read
+      _ <- write (evenOdd(num))
+    } yield ()
   }
 
 }

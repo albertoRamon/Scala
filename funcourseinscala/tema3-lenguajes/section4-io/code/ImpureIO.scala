@@ -3,6 +3,8 @@ package lenguajes.io
 
 import scala.io.StdIn._
 
+
+//Implementacion simple (1)
 object ImpureIO{
 
   // Interface
@@ -20,7 +22,7 @@ object ImpureIO{
     msg
   }
 
-  // Interpretation
+  // Interpretation: para la consola
 
   object ConsoleIO extends IO{
     def read(): String = readLine

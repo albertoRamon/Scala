@@ -1,8 +1,9 @@
 package org.hablapps.fpinscala
 package lenguajes.io
 
-// IO Language
+// def IO Language
 
+//Version B
 trait IO[F[_]]{
   def read: F[String]
   def write(msg: String): F[Unit]
@@ -15,7 +16,7 @@ trait IO[F[_]]{
 
 object IO{
 
-  // Syntax
+// Syntax
 
   object Syntax{
     def read[F[_]](implicit IO: IO[F]) = IO.read
